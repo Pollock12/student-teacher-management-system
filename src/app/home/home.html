@@ -1,0 +1,14 @@
+<div class="main-content">
+  <div *ngIf="section == 'teacher'" class="section-box teacher-section">
+    <h2>Teacher Section</h2>
+    <button (click)="goToTeacher('create')">Create</button>
+    <button (click)="goToTeacher('update')">Update</button>
+    <button (click)="goToTeacher('get all')">Get All</button>
+  </div>
+  <div *ngIf="section == 'student'" class="section-box student-section">
+    <h2>Student Section</h2>
+    <button>Create</button>
+    <button>Update</button>
+    <button>Get All</button>
+  </div>
+</div>

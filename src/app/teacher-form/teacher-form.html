@@ -1,0 +1,102 @@
+<h3 *ngIf="action === 'create'" class="form-title">Add New Teacher</h3>
+<h3 *ngIf="action === 'update'" class="form-title">Update Teacher List</h3>
+
+<div *ngIf="action === 'create' || action === 'update'" class="form-class">
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+    <label for="id">Id:</label>
+    <input
+      type="text"
+      id="id"
+      name="id"
+      [(ngModel)]="teacher.id"
+      required
+      #idInput="ngModel"
+    />
+    <div *ngIf="idInput.invalid && idInput.touched" class="error-msg">
+      ID is required
+    </div>
+
+    <label for="name">Name:</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      [(ngModel)]="teacher.name"
+      required
+      #nameInput="ngModel"
+    />
+    <div *ngIf="nameInput.invalid && nameInput.touched" class="error-msg">
+      Name is required
+    </div>
+
+    <label for="email">Email:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="teacher.email"
+      required
+      email
+      #emailInput="ngModel"
+    />
+    <div *ngIf="emailInput.invalid && emailInput.touched" class="error-msg">
+      Valid Email is required
+    </div>
+
+    <label for="subject">Subject:</label>
+    <input
+      type="text"
+      id="subject"
+      name="subject"
+      [(ngModel)]="teacher.subject"
+      required
+      #subjectInput="ngModel"
+    />
+    <div *ngIf="subjectInput.invalid && subjectInput.touched" class="error-msg">
+      Subject is required
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      {{ action === 'update' && editIndex !== null ? 'Update' : 'Submit' }}
+    </button>
+  </form>
+</div>
+
+<div *ngIf="action === 'get' || action === 'update'">
+  <h3 style="text-align: center;">Teacher List</h3>
+  <table
+    class="table table-bordered"
+    style="width: 100%; border-collapse: collapse;"
+    border="1"
+  >
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th *ngIf="action === 'update'">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of teacherList; let i = index"
+        style="text-align: center"
+      >
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.subject }}</td>
+        <td *ngIf="action === 'update'">
+          <button type="button" (click)="editTeacher(i)" style="margin-right: 8px;">
+            Edit
+          </button>
+          <button type="button" (click)="deleteTeacher(item.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

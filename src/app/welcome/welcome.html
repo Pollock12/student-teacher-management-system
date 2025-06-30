@@ -1,0 +1,35 @@
+<div class="welcome-container">
+  <div class="header">
+    <h1>Teacher-Student Management System</h1>
+    <div class="header-buttons">
+      <button class="login-btn" (click)="showLoginForm = true" *ngIf="!showLoginForm">Log in</button>
+    </div>
+  </div>
+
+  <div class="welcome-message" *ngIf="!showLoginForm">
+    <p>Hello, Welcome to the Teacher-Student Management System</p>
+  </div>
+
+  <div *ngIf="showLoginForm" class="login-form" style="margin-top:20px;">
+    <form (ngSubmit)="login()">
+      <input
+        type="text"
+        [(ngModel)]="user.username"
+        name="username"
+        placeholder="Username"
+        required
+      />
+      <br /><br />
+      <input
+        type="password"
+        [(ngModel)]="user.password"
+        name="password"
+        placeholder="Password"
+        required
+      />
+      <br /><br />
+      <button type="submit">Submit</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<h3 *ngIf="action === 'create'" class="form-title">Add New Student</h3>
+<h3 *ngIf="action === 'update'" class="form-title">Update Student List</h3>
+ 
+<div *ngIf="action === 'create' || action === 'update'" class="form-class">
+    <form (ngSubmit)="onSubmit()">
+        <label>Roll:</label>
+        <input type="text" [(ngModel)]="student.roll" name="roll" required />
+ 
+        <label>Full Name:</label>
+        <input type="text" [(ngModel)]="student.student_name" name="student_name" required />
+ 
+        <label>Email:</label>
+        <input type="text" [(ngModel)]="student.student_mail" name="student_mail" required />
+ 
+        <label>Department:</label>
+        <input type="text" [(ngModel)]="student.department" name="department" required />
+
+        <label>Mobile No:</label>
+        <input type="text" [(ngModel)]="student.mobile_no" name="mobile_no" required />
+ 
+        <button type="submit">{{action === 'update' && editIndex !== null ? 'Update' : 'Submit'}}</button>
+    </form>
+</div>
+<div *ngIf="action === 'update'">
+ 
+</div>
+<div *ngIf="action === 'get' || action === 'update'">
+    <h3 style="text-align : center">Student List</h3>
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered" style="width:100%; border-collapse:collapse;" border="1">
+                <thead>
+                    <tr>
+                        <th>Roll</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Mobile No</th>
+                        <th *ngIf="action==='update'">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of studentList;let i= index">
+                        <tr *ngIf="item.roll && item.student_name && item.student_mail && item.department && item.mobile_no"  style="text-align:center">
+                        <td>{{item.roll}}</td>
+                        <td>{{item.student_name}}</td>
+                        <td>{{item.student_mail}}</td>
+                        <td>{{item.department}}</td>
+                        <td>{{item.mobile_no}}</td>
+                        <td *ngIf="action==='update'">
+                            <button type="button" (click)="editStudent(i)" style="margin-right: 8px;">Edit</button>
+                            <button type="button" (click)="deleteStudent(item.id)">Delete</button>
+                        </td>
+                    </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
