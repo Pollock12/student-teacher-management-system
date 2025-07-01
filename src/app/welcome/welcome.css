@@ -24,7 +24,8 @@
   gap: 15px;
 }
 
-.login-btn, .signin-btn {
+.login-btn,
+.signin-btn {
   padding: 8px 20px;
   border: none;
   border-radius: 4px;
@@ -51,9 +52,6 @@
 }
 
 .welcome-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   padding: 20px;
   font-size: 1.5rem;
@@ -61,29 +59,23 @@
   font-weight: bold;
 }
 
-.login-form {
-  max-width: 320px;
+.login-form,
+.signin-form {
+  width : 400px;
   margin: 20px auto;
   padding: 20px;
   background-color: #fefefe;
-  border: 1px solid #ddd;
   border-radius: 6px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  font-family: Arial, sans-serif;
-}
-
-.login-form label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
-  color: #333;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-form input[type="text"],
-.login-form input[type="password"] {
+.login-form input[type="password"],
+.signin-form input[type="text"],
+.signin-form input[type="password"] {
   width: 100%;
   padding: 8px 10px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -92,7 +84,9 @@
 }
 
 .login-form input[type="text"]:focus,
-.login-form input[type="password"]:focus {
+.login-form input[type="password"]:focus,
+.signin-form input[type="text"]:focus,
+.signin-form input[type="password"]:focus {
   border-color: #3f51b5;
   outline: none;
 }
@@ -100,12 +94,13 @@
 .button-group {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
+  gap: 20px;
+  margin-top: 12px;
 }
 
-.login-form button {
-  flex: 1 1 45%;
-  padding: 14px 0;
+.login-form button,
+.signin-form button {
+  padding: 12px 0;
   min-width: 120px;
   border: none;
   border-radius: 4px;
@@ -117,22 +112,26 @@
   box-sizing: border-box;
 }
 
-.login-form button[type="submit"] {
+.login-form button[type="submit"],
+.signin-form button[type="submit"] {
   background-color: #3f51b5;
   color: white;
   margin-right: 20px;
 }
 
-.login-form button[type="submit"]:hover {
+.login-form button[type="submit"]:hover,
+.signin-form button[type="submit"]:hover {
   background-color: #303f9f;
 }
 
-.login-form .cancel-btn {
+.login-form .cancel-btn,
+.signin-form .cancel-btn {
   background-color: #f44336;
   color: white;
   margin-left: 20px;
 }
 
-.login-form .cancel-btn:hover {
+.login-form .cancel-btn:hover,
+.signin-form .cancel-btn:hover {
   background-color: #d32f2f;
 }

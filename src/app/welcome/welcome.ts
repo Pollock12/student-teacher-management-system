@@ -8,13 +8,35 @@ import { Router } from '@angular/router';
   styleUrl: './welcome.css'
 })
 export class Welcome {
-   user = { username: '', password: '' };
-  showLoginForm = false;
+  user = { email: '', password: '' }; // Login
+  newUser = { fullname: '', email: '', password: '', confirm_password: '' }; // Sign in
 
-  constructor(private router: Router) {}
+  showLoginForm = false;
+  showSigninForm = false;
+
+  constructor(private router: Router) { }
+
+  signin() {
+    const { fullname, email, password, confirm_password } = this.newUser;
+    if (!fullname || !email || !password || !confirm_password) {
+      alert("All fields are requred!");
+      return;
+    }
+    if (password != confirm_password) {
+      alert("Password don't match!");
+      return;
+    }
+
+    localStorage.setItem('registered', JSON.stringify({email, password }));
+
+    alert("Sign Up Successful");
+    this.newUser = { fullname: '', email: '', password: '', confirm_password: '' };
+    this.showSigninForm=false;
+  }
 
   login() {
-    if (this.user.username === 'admin' && this.user.password === '1234') {
+    const savedUser = JSON.parse(localStorage.getItem('registered') || '{}');
+    if (this.user.email === savedUser.email && this.user.password === savedUser.password) {
       alert('Login successful');
       localStorage.setItem('token', 'demo-token');
       this.router.navigate(['/home']);
@@ -25,6 +47,8 @@ export class Welcome {
 
   cancel() {
     this.showLoginForm = false;
-    this.user = { username: '', password: '' };
+    this.showSigninForm = false;
+    this.user = { email: '', password: '' };
+    this.newUser = { fullname: '', email: '', password: '', confirm_password: '' };
   }
 }
