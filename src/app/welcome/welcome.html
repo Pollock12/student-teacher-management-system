@@ -2,44 +2,12 @@
   <div class="header">
     <h1>Teacher Student Management System</h1>
     <div class="header-buttons">
-      <button class="login-btn" (click)="showLoginForm = true; showSigninForm = false" *ngIf="!showLoginForm">Log in</button>
-      <button class="signin-btn" (click)="showSigninForm = true; showLoginForm = false" *ngIf="!showSigninForm">Sign Up</button>
+      <button class="login-btn" *ngIf="!(_auth.isAuthenticated$ | async)" 
+      (click)="loginWithRedirect()">Log in</button>
     </div>
   </div>
 
-  <div class="welcome-message" *ngIf="!showLoginForm && !showSigninForm">
+  <div class="welcome-message">
     <p>Hello, Welcome to the Teacher-Student Management System</p>
-  </div>
-
-  <div *ngIf="showSigninForm" class="signin-form">
-    <form (ngSubmit)="signin()">
-      <h2 style="text-align : center">Sign Up</h2>
-      <p>Full Name</p>
-      <input type="text" [(ngModel)]="newUser.fullname" name="fullname" required />
-      <p>Email Address</p>
-      <input type="text" [(ngModel)]="newUser.email" name="email" required />
-      <p>Password</p>
-      <input type="password" [(ngModel)]="newUser.password" name="password" required />
-      <p>Confirm Password</p>
-      <input type="password" [(ngModel)]="newUser.confirm_password" name="confirm_password" required />
-      <div class="button-group">
-        <button type="submit">Submit</button>
-        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
-      </div>
-    </form>
-  </div>
-
-  <div *ngIf="showLoginForm" class="login-form">
-    <form (ngSubmit)="login()">
-      <h2 style="text-align : center">Log in</h2>
-      <p>Email Address</p>
-      <input type="text" [(ngModel)]="user.email" name="email" required />
-      <p>Password</p>
-      <input type="password" [(ngModel)]="user.password" name="password" required />
-      <div class="button-group">
-        <button type="submit">Submit</button>
-        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
-      </div>
-    </form>
   </div>
 </div>

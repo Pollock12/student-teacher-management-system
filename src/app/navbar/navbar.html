@@ -5,7 +5,8 @@
             <button class="home-btn" (click)="go('home')">Home</button>
             <button class="teacher-btn" (click)="go('teacher')">Teacher</button>
             <button class="student-btn" (click)="go('student')">Student</button>
-            <button class="logout-btn" (click)="logout()">Log out</button>
+             <button class="logout-btn" *ngIf="_auth.isAuthenticated$ | async" 
+             (click)="_auth.logout()">Log out</button>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-welcome',
@@ -7,48 +8,22 @@ import { Router } from '@angular/router';
   templateUrl: './welcome.html',
   styleUrl: './welcome.css'
 })
-export class Welcome {
-  user = { email: '', password: '' }; // Login
-  newUser = { fullname: '', email: '', password: '', confirm_password: '' }; // Sign in
+export class Welcome implements OnInit {
 
-  showLoginForm = false;
-  showSigninForm = false;
+  constructor(
+    public _auth: AuthService,
+    private router: Router
+  ) { }
 
-  constructor(private router: Router) { }
-
-  signin() {
-    const { fullname, email, password, confirm_password } = this.newUser;
-    if (!fullname || !email || !password || !confirm_password) {
-      alert("All fields are requred!");
-      return;
-    }
-    if (password != confirm_password) {
-      alert("Password don't match!");
-      return;
-    }
-
-    localStorage.setItem('registered', JSON.stringify({email, password }));
-
-    alert("Sign Up Successful");
-    this.newUser = { fullname: '', email: '', password: '', confirm_password: '' };
-    this.showSigninForm=false;
+  ngOnInit() {
+    this._auth.isAuthenticated$.subscribe(isAuthenticated => {
+      if (isAuthenticated) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+  loginWithRedirect() {
+    this._auth.loginWithRedirect();
   }
 
-  login() {
-    const savedUser = JSON.parse(localStorage.getItem('registered') || '{}');
-    if (this.user.email === savedUser.email && this.user.password === savedUser.password) {
-      alert('Login successful');
-      localStorage.setItem('token', 'demo-token');
-      this.router.navigate(['/home']);
-    } else {
-      alert('Invalid username or password');
-    }
-  }
-
-  cancel() {
-    this.showLoginForm = false;
-    this.showSigninForm = false;
-    this.user = { email: '', password: '' };
-    this.newUser = { fullname: '', email: '', password: '', confirm_password: '' };
-  }
 }
